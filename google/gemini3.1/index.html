@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google - Our Company</title>
+    <meta name="description" content="Google's mission is to organize the world's information and make it universally accessible and useful.">
+    <style>
+    /* CSS Reset & Variables */
+    :root {
+        --blue: #4285F4;
+        --red: #EA4335;
+        --yellow: #FBBC05;
+        --green: #34A853;
+        --dark: #202124;
+        --gray: #5f6368;
+        --light-gray: #f1f3f4;
+        --bg: #ffffff;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+        font-family: 'Google Sans', Roboto, Arial, sans-serif;
+        color: var(--dark);
+        line-height: 1.6;
+        background-color: var(--bg);
+        -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, h5 { font-family: 'Product Sans', 'Google Sans', sans-serif; letter-spacing: -0.5px; }
+    
+    /* Utility Classes */
+    .section { padding: 100px 5%; max-width: 1400px; margin: 0 auto; }
+    .text-center { text-align: center; }
+    .mb-2 { margin-bottom: 16px; }
+    .mb-4 { margin-bottom: 32px; }
+    .mb-8 { margin-bottom: 64px; }
+    
+    /* Header */
+    header {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 24px 5%; border-bottom: 1px solid #e8eaed;
+        position: sticky; top: 0; background-color: rgba(255, 255, 255, 0.98);
+        z-index: 1000; backdrop-filter: blur(10px);
+    }
+    .logo {
+        font-size: 28px; font-weight: 700; letter-spacing: -1px;
+    }
+    .logo span:nth-child(1) { color: var(--blue); }
+    .logo span:nth-child(2) { color: var(--red); }
+    .logo span:nth-child(3) { color: var(--yellow); }
+    .logo span:nth-child(4) { color: var(--blue); }
+    .logo span:nth-child(5) { color: var(--green); }
+    .logo span:nth-child(6) { color: var(--red); }
+    
+    nav { display: flex; gap: 32px; }
+    nav a { text-decoration: none; color: var(--gray); font-weight: 500; font-size: 15px; transition: color 0.2s; }
+    nav a:hover { color: var(--dark); }
+    
+    .btn { padding: 12px 24px; border-radius: 4px; font-weight: 500; text-decoration: none; display: inline-block; transition: 0.2s; }
+    .btn-primary { background: var(--blue); color: white; border: transparent; }
+    .btn-primary:hover { background: #3b78e7; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+    .btn-outline { border: 1px solid #dadce0; color: var(--blue); }
+    .btn-outline:hover { background: #f8f9fa; }
+
+    /* Hero */
+    .hero { text-align: center; padding: 160px 20px 120px; background: linear-gradient(180deg, #f8f9fa 0%, #fff 100%); }
+    .hero h1 { font-size: 72px; font-weight: 400; line-height: 1.1; max-width: 1000px; margin: 0 auto 32px; letter-spacing: -2px; }
+    .hero p { font-size: 24px; color: var(--gray); max-width: 800px; margin: 0 auto 48px; font-weight: 400; }
+    
+    /* Grid Layouts */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; }
+
+    /* Cards */
+    .card { background: var(--bg); border: 1px solid #e8eaed; border-radius: 24px; padding: 48px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 24px 40px -10px rgba(0,0,0,0.1); border-color: transparent; }
+    
+    /* Distinct Product Colors for Cards */
+    .card.blue-hover:hover { box-shadow: 0 24px 40px -10px rgba(66,133,244,0.15); }
+    .card.red-hover:hover { box-shadow: 0 24px 40px -10px rgba(234,67,53,0.15); }
+    .card.yellow-hover:hover { box-shadow: 0 24px 40px -10px rgba(251,188,5,0.15); }
+    .card.green-hover:hover { box-shadow: 0 24px 40px -10px rgba(52,168,83,0.15); }
+
+    .icon-container { width: 64px; height: 64px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; font-size: 28px; font-weight: bold; }
+    .bg-blue { background: #e8f0fe; color: var(--blue); }
+    .bg-red { background: #fce8e6; color: var(--red); }
+    .bg-yellow { background: #fef7e0; color: var(--yellow); }
+    .bg-green { background: #e6f4ea; color: var(--green); }
+
+    .card h3 { font-size: 28px; font-weight: 400; margin-bottom: 16px; }
+    .card p { font-size: 18px; color: var(--gray); line-height: 1.5; }
+
+    /* Impact Section */
+    .impact-stats { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 40px; text-align: center; padding: 60px 0; border-top: 1px solid #e8eaed; border-bottom: 1px solid #e8eaed; }
+    .stat h4 {font-size: 64px; font-weight: 400; color: var(--dark); letter-spacing: -2px; }
+    .stat p {font-size: 18px; color: var(--gray); font-weight: 500;}
+
+    /* AI Section */
+    .ai-section { background: #202124; color: white; padding: 120px 5%; }
+    .ai-section .gray-text { color: #9aa0a6; }
+    .gradient-text { background: linear-gradient(90deg, #A8C7FA 0%, #D3E3FD 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    /* Visual Blocks */
+    .visual-block { width: 100%; height: 400px; border-radius: 24px; background: #f1f3f4; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+    .visual-block.sustainability { background: linear-gradient(135deg, #e6f4ea 0%, #ceead6 100%); }
+    .visual-block.security { background: linear-gradient(135deg, #e8f0fe 0%, #d2e3fc 100%); }
+
+    /* Footer */
+    footer { background: #f8f9fa; padding: 60px 5% 40px; font-size: 14px; color: var(--gray); border-top: 1px solid #dadce0; }
+    .footer-grid { display: grid; grid-template-columns: minmax(200px, 1fr) repeat(4, 1fr); gap: 40px; margin-bottom: 40px; }
+    .footer-col h5 { font-size: 16px; color: var(--dark); margin-bottom: 24px; font-weight: 500; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 12px; }
+    .footer-col ul a { color: var(--gray); text-decoration: none; transition: 0.2s; font-size: 15px; }
+    .footer-col ul a:hover { color: var(--dark); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid #dadce0; }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { color: var(--gray); text-decoration: none; }
+
+    @media (max-width: 1024px) {
+        .grid-2 { grid-template-columns: 1fr; }
+        .hero h1 { font-size: 56px; }
+        .hero p { font-size: 20px; }
+        .footer-grid { grid-template-columns: 1fr 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+        header { flex-direction: column; gap: 20px; text-align: center; }
+        nav { flex-wrap: wrap; justify-content: center; gap: 16px; }
+        .hero { padding: 80px 20px; }
+        .hero h1 { font-size: 40px; }
+        .footer-grid { grid-template-columns: 1fr 1fr; }
+        .stat h4 { font-size: 48px; }
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span>
+        </div>
+        <nav>
+            <a href="#about">About Us</a>
+            <a href="#products">Products</a>
+            <a href="#innovation">Innovation</a>
+            <a href="#commitments">Commitments</a>
+            <a href="#careers">Careers</a>
+        </nav>
+        <div style="display: flex; gap: 16px;">
+            <a href="#" class="btn btn-primary">Sign In</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="about">
+            <h1>Our mission is to organize the world's information and make it universally accessible and useful.</h1>
+            <p>For more than two decades, Google has been building products that help people understand and interact with the world around them.</p>
+            <div style="display: flex; gap: 16px; justify-content: center;">
+                <a href="#products" class="btn btn-primary">Explore our products</a>
+                <a href="#impact" class="btn btn-outline">Read our story</a>
+            </div>
+        </section>
+
+        <!-- Impact / Scale Section -->
+        <section class="section" id="impact">
+            <h2 class="text-center mb-8" style="font-size: 48px; font-weight: 400;">Impact at Scale</h2>
+            <div class="impact-stats">
+                <div class="stat">
+                    <h4>15+</h4>
+                    <p>Products with over 500M users</p>
+                </div>
+                <div class="stat">
+                    <h4>6</h4>
+                    <p>Products with over 2B users</p>
+                </div>
+                <div class="stat">
+                    <h4>100+</h4>
+                    <p>Languages supported globally</p>
+                </div>
+                <div class="stat">
+                    <h4>0</h4>
+                    <p>Net carbon emissions since 2007</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section class="section" id="products">
+            <h2 class="text-center mb-2" style="font-size: 52px; font-weight: 400;">Helpful products for everyone</h2>
+            <p class="text-center mb-8" style="font-size: 20px; color: var(--gray); max-width: 600px; margin-left: auto; margin-right: auto;">From finding answers to navigating the globe, our products are designed to make daily life easier.</p>
+            
+            <div class="grid-4">
+                <div class="card blue-hover">
+                    <div class="icon-container bg-blue">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                    </div>
+                    <h3>Search</h3>
+                    <p>Explore the world's information to find exactly what you're looking for, fast.</p>
+                </div>
+                <div class="card red-hover">
+                    <div class="icon-container bg-red">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                    </div>
+                    <h3>Maps</h3>
+                    <p>Navigate your world and discover local businesses, transit routes, and places to explore.</p>
+                </div>
+                <div class="card yellow-hover">
+                    <div class="icon-container bg-yellow">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    </div>
+                    <h3>Workspace</h3>
+                    <p>Collaborate seamlessly with Gmail, Docs, Drive, and Meet, designed for modern teams.</p>
+                </div>
+                <div class="card green-hover">
+                    <div class="icon-container bg-green">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M14.5 12h-5v2h5v-2zm0-4h-5v2h5V8zm-9 8h2v-8h-2v8zm14.5-9.5c0-.82-.68-1.5-1.5-1.5h-10c-.82 0-1.5.68-1.5 1.5v11c0 .82.68 1.5 1.5 1.5h10c.82 0 1.5-.68 1.5-1.5v-11zm-1.5 11h-10v-11h10v11z"/></svg>
+                    </div>
+                    <h3>Android</h3>
+                    <p>The OS that powers billions of active devices, delivering open innovation to everyone.</p>
+                </div>
+            </div>
+            <div class="text-center" style="margin-top: 40px;">
+                <a href="#" class="btn btn-outline">See all products</a>
+            </div>
+        </section>
+
+        <!-- Innovation / AI Section -->
+        <section class="ai-section" id="innovation">
+            <div class="section grid-2" style="padding: 0;">
+                <div>
+                    <h2 class="mb-4" style="font-size: 56px; font-weight: 400;"><span class="gradient-text">Pioneering</span> the next era of technology.</h2>
+                    <p class="gray-text mb-4" style="font-size: 22px;">At Google DeepMind and across our AI teams, we are building highly capable, general-purpose models to responsibly advance science and benefit humanity.</p>
+                    <p class="gray-text mb-8" style="font-size: 18px;">We believe AI is a profound technological shift. We are approaching it boldly and responsibly, bringing powerful tools to billions of people, developers, and businesses across the world.</p>
+                    <a href="#" class="btn btn-primary" style="background: white; color: black;">Learn about AI at Google</a>
+                </div>
+                <div class="visual-block" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+                    <div style="font-size: 120px; opacity: 0.1; font-weight: 900; letter-spacing: -5px; line-height: 1;">AI</div>
+                    <div style="position: absolute; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, var(--blue) 0%, transparent 70%); opacity: 0.3; filter: blur(30px); top: 10%; left: 10%;"></div>
+                    <div style="position: absolute; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, var(--red) 0%, transparent 70%); opacity: 0.3; filter: blur(30px); bottom: 10%; right: 10%;"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Commitments Section -->
+        <section class="section" id="commitments">
+            <h2 class="text-center mb-8" style="font-size: 52px; font-weight: 400;">Committed to a better future</h2>
+            
+            <div class="grid-2 mb-8">
+                <div class="visual-block sustainability">
+                    <div style="width: 120px; height: 120px; border-radius: 50%; background: white; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(52,168,83,0.2);">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="var(--green)"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm1-11h-2v4H8v2h3v4h2v-4h3v-2h-3V8z"/></svg>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="mb-4" style="font-size: 40px; font-weight: 400;">Sustainability</h3>
+                    <p class="mb-4" style="font-size: 20px; color: var(--gray);">We are committed to operating our business on 24/7 carbon-free energy by 2030, everywhere we operate.</p>
+                    <p style="font-size: 18px; color: var(--gray);">From matching 100% of our electricity consumption with renewable energy purchases since 2017 to building the most energy-efficient data centers, sustainability is deeply embedded in our operations. Our goal is to leave a greener planet for the next generation.</p>
+                    <a href="#" style="display: inline-block; margin-top: 16px; color: var(--blue); text-decoration: none; font-weight: 500; font-size: 18px;">Read our environmental report &rarr;</a>
+                </div>
+            </div>
+
+            <div class="grid-2" style="direction: rtl;">
+                <div class="visual-block security">
+                    <div style="width: 120px; height: 120px; border-radius: 50%; background: white; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(66,133,244,0.2);">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="var(--blue)"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                    </div>
+                </div>
+                <div style="direction: ltr;">
+                    <h3 class="mb-4" style="font-size: 40px; font-weight: 400;">Privacy & Security</h3>
+                    <p class="mb-4" style="font-size: 20px; color: var(--gray);">Protected by default. Private by design. You're in control.</p>
+                    <p style="font-size: 18px; color: var(--gray);">We build products that are secure by default, so your information is safe. Our advanced technologies keep billions of users safe from malware, phishing, and spam every day. We believe your personal data belongs to you, which is why we offer industry-leading privacy controls.</p>
+                    <a href="#" style="display: inline-block; margin-top: 16px; color: var(--blue); text-decoration: none; font-weight: 500; font-size: 18px;">Explore our Safety Center &rarr;</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Careers Section -->
+        <section class="section text-center" id="careers" style="background: #f8f9fa; border-radius: 40px; margin-bottom: 60px;">
+            <div style="max-width: 800px; margin: 0 auto; padding: 60px 20px;">
+                <h2 class="mb-4" style="font-size: 56px; font-weight: 400;">Build for everyone</h2>
+                <p class="mb-8" style="font-size: 22px; color: var(--gray);">Bring your questions. Build the answers. At Google, we're looking for passionate people who want to solve the world's biggest challenges.</p>
+                <div style="display: flex; gap: 16px; justify-content: center;">
+                    <a href="#" class="btn btn-primary" style="font-size: 18px; padding: 16px 32px;">Explore careers</a>
+                    <a href="#" class="btn btn-outline" style="font-size: 18px; padding: 16px 32px;">Life at Google</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="section" style="padding: 0; border: none;">
+            <div class="footer-grid">
+                <div class="footer-col" style="grid-column: span 1;">
+                    <div class="logo">
+                        <span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h5>About Google</h5>
+                    <ul>
+                        <li><a href="#">Our company</a></li>
+                        <li><a href="#">Our stories</a></li>
+                        <li><a href="#">Diversity & Inclusion</a></li>
+                        <li><a href="#">Locations</a></li>
+                        <li><a href="#">Contact us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Products</h5>
+                    <ul>
+                        <li><a href="#">Search</a></li>
+                        <li><a href="#">Maps</a></li>
+                        <li><a href="#">Android</a></li>
+                        <li><a href="#">Hardware</a></li>
+                        <li><a href="#">YouTube</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Commitments</h5>
+                    <ul>
+                        <li><a href="#">Sustainability</a></li>
+                        <li><a href="#">Corporate responsibility</a></li>
+                        <li><a href="#">Privacy & Security</a></li>
+                        <li><a href="#">Crisis Response</a></li>
+                        <li><a href="#">Accessibility</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Developers & Business</h5>
+                    <ul>
+                        <li><a href="#">Google for Developers</a></li>
+                        <li><a href="#">Google Cloud</a></li>
+                        <li><a href="#">Google Ads</a></li>
+                        <li><a href="#">Workspace</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-links">
+                    <a href="#">Help</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                </div>
+                <div style="font-size: 14px;">
+                    © 2026 Google LLC
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

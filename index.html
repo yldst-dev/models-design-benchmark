@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Design Search Prototypes</title>
+  <meta name="description" content="A collection of web design prototypes for various AI assistant concepts.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23111111'/%3E%3Cpath d='M10 22L16 10L22 22' stroke='%23ffffff' stroke-width='2' fill='none'/%3E%3Cpath d='M12.5 18H19.5' stroke='%23ffffff' stroke-width='2'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --bg: #FAFAFA;
+      --text: #111111;
+      --card-bg: #FFFFFF;
+      --border: #EAEAEA;
+      --accent: #000000;
+      --hover-border: #CCCCCC;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0A0A0A;
+        --text: #EDEDED;
+        --card-bg: #141414;
+        --border: #2A2A2A;
+        --accent: #FFFFFF;
+        --hover-border: #444444;
+      }
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 1000px;
+      width: 100%;
+    }
+
+    header {
+      margin-bottom: 0;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+
+    p.subtitle {
+      color: #666;
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    @media (prefers-color-scheme: dark) {
+      p.subtitle { color: #999; }
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--accent);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
+      border-color: var(--hover-border);
+    }
+    
+    @media (prefers-color-scheme: dark) {
+      .project-card:hover { box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4); }
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
+    }
+
+    /* Brand-specific top border colors */
+    .card-gpt:hover::before { background: #10a37f; } /* OpenAI Green */
+    .card-gemini:hover::before { background: linear-gradient(90deg, #4285f4, #ea4335, #fbbc05, #34a853); } /* Google Colors */
+    .card-claude:hover::before { background: #D4714E; } /* Anthropic Tawny */
+
+    .project-tag {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+      color: #888;
+      margin-bottom: 1rem;
+      display: none;
+    }
+
+    .project-title {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+    }
+
+    .project-desc {
+      color: #666;
+      font-size: 1rem;
+      margin-bottom: 2.5rem;
+      flex-grow: 1;
+    }
+    
+    @media (prefers-color-scheme: dark) {
+      .project-desc { color: #A0A0A0; }
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 500;
+      font-size: 1rem;
+      color: var(--accent);
+      margin-top: 1rem;
+    }
+
+    .project-link svg {
+      margin-left: 0.5rem;
+      transition: transform 0.2s ease;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      width: 18px;
+      height: 18px;
+    }
+
+    .project-card:hover .project-link svg {
+      transform: translateX(6px);
+    }
+
+    footer {
+      margin-top: 0;
+      text-align: center;
+      color: #888;
+      font-size: 0.9rem;
+    }
+    
+    /* Reveal animation */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .animate-up {
+      animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      opacity: 0;
+    }
+    
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+
+    details.prompt-block {
+      margin-top: 2rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      text-align: center;
+      color: var(--text);
+      font-size: 1rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+    
+    details.prompt-block:hover {
+      border-color: var(--hover-border);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      transform: translateY(-2px);
+    }
+
+    details.prompt-block[open] {
+      border-radius: 24px;
+    }
+
+    details.prompt-block summary {
+      padding: 1.2rem 2.5rem;
+      cursor: pointer;
+      font-weight: 500;
+      list-style: none;
+      outline: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      letter-spacing: 0.02em;
+    }
+
+    details.prompt-block summary::-webkit-details-marker {
+      display: none;
+    }
+    
+    details.prompt-block summary svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+    
+    details.prompt-block[open] summary svg {
+      transform: rotate(180deg);
+    }
+
+    .prompt-content {
+      padding: 0 2.5rem 1.5rem 2.5rem;
+      line-height: 1.6;
+      word-break: keep-all;
+      color: #666;
+    }
+    
+    @media (prefers-color-scheme: dark) {
+      details.prompt-block {
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      }
+      details.prompt-block:hover {
+        box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      }
+      .prompt-content {
+        color: #A0A0A0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header class="animate-up">
+      <h1>Anthropic design benchmark</h1>
+    </header>
+
+    <section style="margin-bottom: 4rem;">
+      <div class="projects-grid">
+        
+        <!-- GPT-5.4 Project -->
+        <a href="./gpt5.4/index.html" class="project-card card-gpt animate-up delay-1">
+          <span class="project-tag">gpt5.4</span>
+          <h2 class="project-title">GPT-5.4</h2>
+
+          <div class="project-link">
+            View Project
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+
+        <!-- Gemini 3.1 Pro Project -->
+        <a href="./gemini3.1pro/index.html" class="project-card card-gemini animate-up delay-2">
+          <span class="project-tag">gemini3.1pro</span>
+          <h2 class="project-title">Gemini 3.1 Pro</h2>
+
+          <div class="project-link">
+            View Project
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+
+        <!-- Claude 4.6 Opus Project -->
+        <a href="./claude4.6opus/index.html" class="project-card card-claude animate-up delay-3">
+          <span class="project-tag">claude4.6opus</span>
+          <h2 class="project-title">Claude 4.6 Opus</h2>
+
+          <div class="project-link">
+            View Project
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+
+      </div>
+
+      <details class="prompt-block animate-up delay-3">
+        <summary>
+          Prompts
+          <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="prompt-content">
+          Anthropic의 페이지 그대로 만들어줘. html,css를 사용하도록 해.<br>
+          Anthropic의 디자인 철학, 색상 등을 그대로 반영해줘.<br><br>
+          스킬 등은 아무것도 사용하지마. 너가 아는 느낌과 감각 그대로를 사용해서 코딩하도록해.
+        </div>
+      </details>
+    </section>
+
+    <header class="animate-up">
+      <h1>Google design benchmark</h1>
+    </header>
+
+    <section>
+      <div class="projects-grid">
+        
+        <!-- GPT-5.4 Project -->
+        <a href="./google/gpt5.4/index.html" class="project-card card-gpt animate-up delay-1">
+          <span class="project-tag">gpt5.4</span>
+          <h2 class="project-title">GPT-5.4</h2>
+
+          <div class="project-link">
+            View Project
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+
+        <!-- Gemini 3.1 Pro Project -->
+        <a href="./google/gemini3.1/index.html" class="project-card card-gemini animate-up delay-2">
+          <span class="project-tag">gemini3.1pro</span>
+          <h2 class="project-title">Gemini 3.1 Pro</h2>
+
+          <div class="project-link">
+            View Project
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+
+        <!-- Claude 4.6 Opus Project -->
+        <a href="./google/opus4.6/index.html" class="project-card card-claude animate-up delay-3">
+          <span class="project-tag">claude4.6opus</span>
+          <h2 class="project-title">Claude 4.6 Opus</h2>
+
+          <div class="project-link">
+            View Project
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+
+      </div>
+
+      <details class="prompt-block animate-up delay-3">
+        <summary>
+          Prompts
+          <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="prompt-content">
+          이 디렉터리 안에 Google 공식 소개 홈페이지 만들어줘. 내용은 영문<br>
+          으로 작성해줘. 아무런 사전 정보 없이 그저 모델의 성능만을 평가하기 위한<br>
+          벤치마크성 홈페이지 만들기 테스트이므로 웹 검색, 스킬 사용, MCP 사용을<br>
+          금지할게.
+        </div>
+      </details>
+    </section>
+
+    <footer class="animate-up delay-3">
+    </footer>
+  </div>
+
+</body>
+</html>

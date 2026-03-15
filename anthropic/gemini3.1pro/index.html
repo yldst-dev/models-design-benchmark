@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anthropic</title>
+    <meta name="description" content="Anthropic-inspired static marketing page with product, API, research, support, and sales sections.">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- 정상적이고 우아한 세리프 폰트(Newsreader)와 깔끔한 산세리프 폰트(Inter) 적용 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+</head>
+<body id="top">
+    <!-- 내비게이션 -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">Anthropic</div>
+            <div class="nav-links">
+                <a href="#product" class="nav-item">Claude</a>
+                <a href="#api" class="nav-item">API</a>
+                <a href="#research" class="nav-item">Research</a>
+                <a href="#company" class="nav-item">Company</a>
+                <a href="#news" class="nav-item">News</a>
+            </div>
+            <div class="nav-actions">
+                <a href="#support" class="btn btn-text">Support</a>
+                <a href="#sales" class="btn btn-secondary">Talk to sales</a>
+                <a href="#product" class="btn btn-primary">Try Claude</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- 메인 히어로 섹션 -->
+        <header class="hero">
+            <h1>AI research and products that put safety at the frontier</h1>
+            <p>We are Anthropic, an AI safety and research company that's working to build reliable, interpretable, and steerable AI systems.</p>
+            <div class="hero-actions">
+                <a href="#product" class="btn btn-primary btn-large">Try Claude</a>
+                <a href="#research" class="btn btn-outline btn-large">Read our research</a>
+            </div>
+        </header>
+
+        <!-- Claude 소개 섹션 -->
+        <section id="product" class="section">
+            <div class="section-header">
+                <h2>Meet Claude</h2>
+                <p>Designed for safety and performance.</p>
+            </div>
+            
+            <div class="card claude-card">
+                <div class="card-content">
+                    <span class="badge">Current</span>
+                    <h3>The Claude 3.5 Family</h3>
+                    <p>Our most capable and advanced models yet, offering industry-leading speed and performance across a wide range of complex tasks.</p>
+                    <div class="button-group">
+                        <a href="#product" class="btn btn-primary">Try Claude</a>
+                        <a href="#product" class="btn btn-outline">Learn more</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="features-grid">
+                <div class="grid-card">
+                    <h4>Claude 3.5 Sonnet</h4>
+                    <p>The perfect balance of intelligence and speed for enterprise workloads.</p>
+                    <a href="#product" class="text-link">Explore Sonnet <span class="arrow">→</span></a>
+                </div>
+                <div class="grid-card">
+                    <h4>Claude 3 Haiku</h4>
+                    <p>Fastest and most compact model for near-instant responsiveness.</p>
+                    <a href="#product" class="text-link">Explore Haiku <span class="arrow">→</span></a>
+                </div>
+                <div class="grid-card">
+                    <h4>Claude 3 Opus</h4>
+                    <p>Highly capable model for tackling complex algorithms and tasks.</p>
+                    <a href="#product" class="text-link">Explore Opus <span class="arrow">→</span></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- API 및 개발자 섹션 -->
+        <section id="api" class="section border-top">
+            <div class="split-section">
+                <div class="split-content">
+                    <h2>Build with Claude</h2>
+                    <p>Integrate Anthropic's state-of-the-art models into your own applications with our robust, scalable API.</p>
+                    <div class="button-group">
+                        <a href="#api" class="btn btn-primary">Get API Keys</a>
+                        <a href="#api" class="btn btn-outline">Read Documentation</a>
+                    </div>
+                </div>
+                <div class="split-visual code-block">
+                    <pre><code>import anthropic
+
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-3-5-sonnet-20240620",
+    max_tokens=1000,
+    messages=[
+        {"role": "user", "content": "Hello, Claude"}
+    ]
+)
+print(response.content[0].text)</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- 연구 및 안전 섹션 -->
+        <section id="research" class="section border-top">
+            <div class="section-header center">
+                <h2>Pioneering AI Safety</h2>
+                <p class="subtitle">Our research is dedicated to making AI systems more interpretable, harmless, and aligned.</p>
+            </div>
+            <div class="features-grid dual-grid">
+                <div class="grid-card elevated">
+                    <span class="badge gray">Research</span>
+                    <h4>Constitutional AI</h4>
+                    <p>Training models to act in accordance with a set of principles and guidelines, reducing the need for human feedback.</p>
+                    <a href="#research" class="text-link">Read paper <span class="arrow">→</span></a>
+                </div>
+                <div class="grid-card elevated">
+                    <span class="badge gray">Interpretability</span>
+                    <h4>Extracting Concepts from Claude</h4>
+                    <p>Discovering how millions of distinct concepts are represented inside Claude 3 Sonnet's neural network.</p>
+                    <a href="#research" class="text-link">Explore findings <span class="arrow">→</span></a>
+                </div>
+            </div>
+            <div class="center-action">
+                <a href="#research" class="btn btn-outline">View all research</a>
+            </div>
+        </section>
+
+        <!-- Company 섹션 -->
+        <section id="company" class="section border-top">
+            <div class="split-section">
+                <div class="split-content">
+                    <h2>About Anthropic</h2>
+                    <p>We are a team of researchers, engineers, and policy experts who care deeply about the impact of artificial intelligence on the world.</p>
+                    <div class="button-group">
+                        <a href="#company" class="btn btn-primary">Join our team</a>
+                        <a href="#company" class="btn btn-outline">Read our philosophy</a>
+                    </div>
+                </div>
+                <div class="split-visual company-visual">
+                    <div class="company-placeholder">
+                        <span class="badge">Team</span>
+                        <h3>Building at the frontier</h3>
+                        <p>Our multidisciplinary team spans research, engineering, safety, and policy.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- News 섹션 -->
+        <section id="news" class="section border-top">
+            <div class="section-header news-header">
+                <h2>Latest News</h2>
+                <a href="#news" class="text-link">View all news <span class="arrow">→</span></a>
+            </div>
+            <div class="news-grid">
+                <a href="#news" class="news-card">
+                    <span class="news-date">Mar 12, 2026</span>
+                    <h4>Expanding Claude's context window</h4>
+                </a>
+                <a href="#news" class="news-card">
+                    <span class="news-date">Mar 4, 2026</span>
+                    <h4>A new approach to AI alignment</h4>
+                </a>
+                <a href="#news" class="news-card">
+                    <span class="news-date">Feb 18, 2026</span>
+                    <h4>Anthropic partners with leading enterprise platforms</h4>
+                </a>
+            </div>
+        </section>
+
+        <!-- Support 섹션 -->
+        <section id="support" class="section border-top support-section">
+            <div class="section-header center">
+                <h2>How can we help?</h2>
+                <div class="search-bar">
+                    <input type="search" name="supportSearch" aria-label="Search documentation, guides, or FAQs" placeholder="Search documentation, guides, or FAQs...">
+                    <button class="btn btn-primary btn-search" type="button">Search</button>
+                </div>
+            </div>
+            <div class="features-grid">
+                <div class="grid-card elevated">
+                    <h4>Documentation</h4>
+                    <p>Detailed guides on how to use Claude and integrate with our API.</p>
+                    <a href="#support" class="text-link">Browse docs <span class="arrow">→</span></a>
+                </div>
+                <div class="grid-card elevated">
+                    <h4>Community Forum</h4>
+                    <p>Connect with other developers building with Anthropic's models.</p>
+                    <a href="#support" class="text-link">Join community <span class="arrow">→</span></a>
+                </div>
+                <div class="grid-card elevated">
+                    <h4>Contact Support</h4>
+                    <p>Need more direct help? Reach out to our technical support team.</p>
+                    <a href="#support" class="text-link">Submit a ticket <span class="arrow">→</span></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Talk to Sales 섹션 -->
+        <section id="sales" class="section border-top sales-section">
+            <div class="sales-container">
+                <div class="sales-content">
+                    <h2>Talk to Sales</h2>
+                    <p>Ready to deploy Claude at scale? Our enterprise team can help you build custom solutions, negotiate volume pricing, and ensure compliance.</p>
+                    <ul class="sales-benefits">
+                        <li>
+                            <span class="checkmark">✓</span>
+                            <span>Enterprise-grade security and privacy</span>
+                        </li>
+                        <li>
+                            <span class="checkmark">✓</span>
+                            <span>Dedicated technical support</span>
+                        </li>
+                        <li>
+                            <span class="checkmark">✓</span>
+                            <span>Custom deployment options</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="sales-form-container">
+                    <form class="sales-form" novalidate>
+                        <div class="form-group row">
+                            <div class="form-half">
+                                <label for="sales-first-name">First Name</label>
+                                <input id="sales-first-name" name="firstName" type="text" autocomplete="given-name" placeholder="Jane">
+                            </div>
+                            <div class="form-half">
+                                <label for="sales-last-name">Last Name</label>
+                                <input id="sales-last-name" name="lastName" type="text" autocomplete="family-name" placeholder="Doe">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="sales-email">Work Email</label>
+                            <input id="sales-email" name="email" type="email" autocomplete="email" placeholder="name@company.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="sales-company-size">Company Size</label>
+                            <div class="select-wrapper">
+                                <select id="sales-company-size" name="companySize">
+                                    <option>1-100 employees</option>
+                                    <option>101-500 employees</option>
+                                    <option>501-1000 employees</option>
+                                    <option>1000+ employees</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="sales-message">How can we help?</label>
+                            <textarea id="sales-message" name="message" rows="4" placeholder="Tell us about your project..."></textarea>
+                        </div>
+                        <button class="btn btn-primary btn-large form-submit" type="button">Contact Sales</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- 다양한 버튼 컴포넌트 섹션 -->
+        <section id="components" class="section border-top component-showcase">
+            <div class="section-header">
+                <span class="badge">Design System</span>
+                <h2>Button Components</h2>
+                <p>Variations of buttons used across the Anthropic design system.</p>
+            </div>
+            <div class="component-grid">
+                <div class="component-row">
+                    <p class="component-label">Primary Buttons</p>
+                    <button class="btn btn-primary btn-large">Large Primary</button>
+                    <button class="btn btn-primary">Default Primary</button>
+                    <button class="btn btn-primary btn-small">Small Primary</button>
+                    <button class="btn btn-primary" disabled>Disabled Primary</button>
+                </div>
+                <div class="component-row">
+                    <p class="component-label">Outline Buttons</p>
+                    <button class="btn btn-outline btn-large">Large Outline</button>
+                    <button class="btn btn-outline">Default Outline</button>
+                    <button class="btn btn-outline btn-small">Small Outline</button>
+                    <button class="btn btn-outline" disabled>Disabled Outline</button>
+                </div>
+                <div class="component-row">
+                    <p class="component-label">Secondary / Text Buttons</p>
+                    <button class="btn btn-secondary">Secondary Button</button>
+                    <button class="btn btn-text">Text Button</button>
+                    <a href="#components" class="text-link">Text Link <span class="arrow">→</span></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">Anthropic</div>
+                <p>AI research and products that put safety at the frontier.</p>
+            </div>
+            <div class="footer-links">
+                <div class="link-group">
+                    <h4>Claude</h4>
+                    <a href="#product">Talk to Claude</a>
+                    <a href="#sales">Claude for Business</a>
+                    <a href="#api">API Documentation</a>
+                    <a href="#news">Release Notes</a>
+                </div>
+                <div class="link-group">
+                    <h4>Company</h4>
+                    <a href="#company">About</a>
+                    <a href="#sales">Careers</a>
+                    <a href="#news">News</a>
+                    <a href="#research">Research</a>
+                </div>
+                <div class="link-group">
+                    <h4>Policies</h4>
+                    <a href="#support">Privacy Policy</a>
+                    <a href="#support">Terms of Service</a>
+                    <a href="#support">Acceptable Use</a>
+                    <a href="#support">Responsible Disclosure</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Anthropic PBC</p>
+            <div class="social-links">
+                <a href="#top">Twitter</a>
+                <a href="#top">LinkedIn</a>
+                <a href="#top">YouTube</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

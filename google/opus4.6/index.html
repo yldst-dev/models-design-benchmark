@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Google – Organizing the World's Information</title>
+  <meta name="description" content="Google's mission is to organize the world's information and make it universally accessible and useful." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #4285F4;
+      --red: #EA4335;
+      --yellow: #FBBC05;
+      --green: #34A853;
+      --dark: #202124;
+      --mid: #3C4043;
+      --light: #5F6368;
+      --bg: #F8F9FA;
+      --white: #FFFFFF;
+      --card-shadow: 0 1px 6px rgba(32,33,36,.28);
+      --card-hover: 0 4px 16px rgba(32,33,36,.22);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      color: var(--dark);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px;
+      height: 64px;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,.06);
+      transition: box-shadow .2s;
+    }
+    nav.scrolled { box-shadow: 0 2px 8px rgba(0,0,0,.12); }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 4px;
+      font-family: 'Google Sans', sans-serif;
+      font-size: 22px; font-weight: 700;
+      text-decoration: none; letter-spacing: -.5px;
+    }
+    .nav-logo span:nth-child(1) { color: var(--blue); }
+    .nav-logo span:nth-child(2) { color: var(--red); }
+    .nav-logo span:nth-child(3) { color: var(--yellow); }
+    .nav-logo span:nth-child(4) { color: var(--blue); }
+    .nav-logo span:nth-child(5) { color: var(--green); }
+    .nav-logo span:nth-child(6) { color: var(--red); }
+
+    .nav-links { display: flex; align-items: center; gap: 8px; }
+    .nav-links a {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 14px; font-weight: 500;
+      color: var(--mid);
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 24px;
+      transition: background .15s, color .15s;
+    }
+    .nav-links a:hover { background: var(--bg); color: var(--dark); }
+    .nav-cta {
+      background: var(--blue) !important;
+      color: var(--white) !important;
+    }
+    .nav-cta:hover { background: #3367d6 !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 80px 24px 60px;
+      background: linear-gradient(160deg, #f0f6ff 0%, #fff 50%, #fff8f0 100%);
+      position: relative; overflow: hidden;
+    }
+
+    .hero-orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(80px); opacity: .35; pointer-events: none;
+    }
+    .orb1 { width: 600px; height: 600px; background: #4285F4; top: -200px; left: -150px; }
+    .orb2 { width: 400px; height: 400px; background: #34A853; bottom: -100px; right: -80px; }
+    .orb3 { width: 300px; height: 300px; background: #FBBC05; top: 40%; left: 60%; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #e8f0fe; color: var(--blue);
+      font-family: 'Google Sans', sans-serif;
+      font-size: 13px; font-weight: 500;
+      padding: 6px 16px; border-radius: 24px;
+      margin-bottom: 32px;
+      animation: fadeUp .6s ease both;
+    }
+    .hero-badge::before {
+      content: ''; width: 8px; height: 8px; border-radius: 50%;
+      background: var(--blue); animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .5; transform: scale(1.4); }
+    }
+
+    .hero-logo-mark {
+      display: flex; align-items: center; gap: 0;
+      margin-bottom: 24px;
+      animation: fadeUp .6s .1s ease both;
+    }
+    .gmark { width: 80px; height: 80px; }
+
+    h1 {
+      font-family: 'Google Sans', sans-serif;
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 700; line-height: 1.12;
+      text-align: center; max-width: 760px;
+      color: var(--dark);
+      animation: fadeUp .6s .2s ease both;
+      margin-bottom: 24px;
+    }
+    h1 em { font-style: normal; color: var(--blue); }
+
+    .hero-sub {
+      font-size: clamp(16px, 2vw, 20px);
+      color: var(--light); text-align: center;
+      max-width: 580px; line-height: 1.65;
+      animation: fadeUp .6s .3s ease both;
+      margin-bottom: 40px;
+    }
+
+    .hero-actions {
+      display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+      animation: fadeUp .6s .4s ease both;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Google Sans', sans-serif;
+      font-size: 15px; font-weight: 500;
+      padding: 14px 28px; border-radius: 28px;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: transform .15s, box-shadow .15s, background .15s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      background: var(--blue); color: #fff;
+      box-shadow: 0 2px 8px rgba(66,133,244,.4);
+    }
+    .btn-primary:hover { background: #3367d6; box-shadow: 0 6px 20px rgba(66,133,244,.45); }
+    .btn-outline {
+      background: #fff; color: var(--dark);
+      box-shadow: var(--card-shadow);
+    }
+    .btn-outline:hover { box-shadow: var(--card-hover); }
+
+    .hero-stats {
+      display: flex; gap: 48px; flex-wrap: wrap; justify-content: center;
+      margin-top: 72px;
+      animation: fadeUp .6s .5s ease both;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 36px; font-weight: 700; color: var(--dark);
+    }
+    .stat-label { font-size: 13px; color: var(--light); margin-top: 4px; }
+
+    /* ── PRODUCTS ── */
+    .section {
+      padding: 96px 24px;
+      max-width: 1140px; margin: 0 auto;
+    }
+    .section-eyebrow {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 13px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--blue);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Google Sans', sans-serif;
+      font-size: clamp(28px, 3.5vw, 44px); font-weight: 700;
+      color: var(--dark); max-width: 640px;
+      line-height: 1.2; margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 16px; color: var(--light);
+      max-width: 540px; line-height: 1.7; margin-bottom: 56px;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+    }
+    .product-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 32px 28px;
+      box-shadow: var(--card-shadow);
+      border: 1px solid rgba(0,0,0,.05);
+      transition: box-shadow .2s, transform .2s;
+      cursor: pointer;
+    }
+    .product-card:hover { box-shadow: var(--card-hover); transform: translateY(-4px); }
+    .product-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px; margin-bottom: 20px;
+    }
+    .product-card h3 {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 18px; font-weight: 600;
+      color: var(--dark); margin-bottom: 10px;
+    }
+    .product-card p { font-size: 14px; color: var(--light); line-height: 1.65; }
+
+    /* ── AI FEATURE ── */
+    .ai-section {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      padding: 100px 24px; overflow: hidden; position: relative;
+    }
+    .ai-section::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(66,133,244,.25) 0%, transparent 60%);
+    }
+    .ai-inner {
+      max-width: 1140px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+      position: relative;
+    }
+    .ai-text .section-eyebrow { color: #8ab4f8; }
+    .ai-text .section-title { color: #e8eaed; max-width: 100%; }
+    .ai-text .section-sub { color: #9aa0a6; margin-bottom: 36px; }
+
+    .ai-visual {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 24px;
+      padding: 32px;
+      backdrop-filter: blur(12px);
+    }
+    .ai-chat { display: flex; flex-direction: column; gap: 16px; }
+    .chat-msg {
+      padding: 14px 18px; border-radius: 16px;
+      font-size: 14px; line-height: 1.6; max-width: 85%;
+    }
+    .chat-user {
+      background: var(--blue); color: #fff;
+      align-self: flex-end; border-bottom-right-radius: 4px;
+    }
+    .chat-ai {
+      background: rgba(255,255,255,.1); color: #e8eaed;
+      align-self: flex-start; border-bottom-left-radius: 4px;
+    }
+    .chat-label {
+      font-size: 11px; color: #9aa0a6; font-weight: 500;
+      letter-spacing: .5px; text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .chat-label-right { text-align: right; }
+
+    /* ── MISSION ── */
+    .mission-section {
+      background: var(--bg);
+      padding: 100px 24px;
+    }
+    .mission-inner {
+      max-width: 1140px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    .mission-text .section-title { max-width: 100%; }
+    .mission-pillars { display: flex; flex-direction: column; gap: 28px; margin-top: 0; }
+    .pillar {
+      display: flex; gap: 20px; align-items: flex-start;
+    }
+    .pillar-dot {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+    .pillar h4 {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 16px; font-weight: 600;
+      color: var(--dark); margin-bottom: 6px;
+    }
+    .pillar p { font-size: 14px; color: var(--light); line-height: 1.65; }
+
+    /* ── TIMELINE ── */
+    .timeline-wrap { max-width: 1140px; margin: 0 auto; padding: 96px 24px; }
+    .timeline { position: relative; padding-left: 2px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 20px; top: 0; bottom: 0;
+      width: 2px; background: linear-gradient(to bottom, var(--blue), var(--green));
+    }
+    .tl-item {
+      display: flex; gap: 40px; margin-bottom: 48px;
+      padding-left: 60px; position: relative;
+    }
+    .tl-dot {
+      position: absolute; left: 10px; top: 4px;
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--white); border: 3px solid var(--blue);
+      transition: transform .2s;
+    }
+    .tl-item:hover .tl-dot { transform: scale(1.3); }
+    .tl-year {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 18px; font-weight: 700;
+      color: var(--blue); min-width: 60px;
+    }
+    .tl-content h4 {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 16px; font-weight: 600;
+      color: var(--dark); margin-bottom: 6px;
+    }
+    .tl-content p { font-size: 14px; color: var(--light); line-height: 1.65; }
+
+    /* ── RESPONSIBILITY ── */
+    .resp-section { background: #fff; padding: 96px 24px; }
+    .resp-inner { max-width: 1140px; margin: 0 auto; }
+    .resp-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 32px; margin-top: 56px;
+    }
+    .resp-card {
+      text-align: center; padding: 40px 24px;
+      border-radius: 20px;
+      transition: transform .2s;
+    }
+    .resp-card:hover { transform: translateY(-6px); }
+    .resp-icon { font-size: 40px; margin-bottom: 16px; }
+    .resp-card h3 {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 16px; font-weight: 600;
+      color: var(--dark); margin-bottom: 10px;
+    }
+    .resp-card p { font-size: 13px; color: var(--light); line-height: 1.7; }
+
+    /* ── NUMBERS ── */
+    .numbers-section {
+      background: linear-gradient(135deg, var(--blue) 0%, #1557b0 100%);
+      padding: 80px 24px;
+    }
+    .numbers-inner {
+      max-width: 1140px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 32px; text-align: center;
+    }
+    .num-card h2 {
+      font-family: 'Google Sans', sans-serif;
+      font-size: clamp(32px,4vw,52px); font-weight: 700;
+      color: #fff; margin-bottom: 8px;
+    }
+    .num-card p { font-size: 14px; color: rgba(255,255,255,.75); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark); color: #9aa0a6;
+      padding: 60px 24px 40px;
+    }
+    .footer-inner { max-width: 1140px; margin: 0 auto; }
+    .footer-top {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px; margin-bottom: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .footer-brand .nav-logo { margin-bottom: 16px; }
+    .footer-brand p { font-size: 13px; line-height: 1.7; max-width: 280px; }
+    .footer-col h5 {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 13px; font-weight: 600;
+      color: #e8eaed; letter-spacing: .5px;
+      text-transform: uppercase; margin-bottom: 16px;
+    }
+    .footer-col a {
+      display: block; font-size: 13px;
+      color: #9aa0a6; text-decoration: none;
+      margin-bottom: 10px; transition: color .15s;
+    }
+    .footer-col a:hover { color: #fff; }
+    .footer-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px;
+      font-size: 12px;
+    }
+    .footer-bottom-links { display: flex; gap: 24px; }
+    .footer-bottom-links a { color: #9aa0a6; text-decoration: none; }
+    .footer-bottom-links a:hover { color: #fff; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .ai-inner, .mission-inner { grid-template-columns: 1fr; gap: 48px; }
+      .numbers-inner { grid-template-columns: repeat(2, 1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .nav-links a:not(.nav-cta) { display: none; }
+      .hero-stats { gap: 32px; }
+      .numbers-inner { grid-template-columns: 1fr 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span>
+  </a>
+  <div class="nav-links">
+    <a href="#products">Products</a>
+    <a href="#ai">AI</a>
+    <a href="#mission">Mission</a>
+    <a href="#sustainability">Sustainability</a>
+    <a href="#" class="nav-cta">Get Started</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-orb orb1"></div>
+  <div class="hero-orb orb2"></div>
+  <div class="hero-orb orb3"></div>
+
+  <div class="hero-badge">Now powered by Gemini AI</div>
+
+  <svg class="gmark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M46 36c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10c2.761 0 5.261 1.119 7.071 2.929" stroke="#4285F4" stroke-width="5" stroke-linecap="round"/>
+    <path d="M36 26v-6M36 52v-6M50 36h6M16 36h6" stroke="#34A853" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="56" cy="36" r="10" fill="#EA4335"/>
+    <path d="M56 30v6l4 3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+
+  <h1>Organize the World's <em>Information</em>, Make it Universally Accessible</h1>
+  <p class="hero-sub">For over 25 years, Google has been building products that help billions of people connect, create, and thrive — powered by AI that's genuinely helpful.</p>
+
+  <div class="hero-actions">
+    <a href="#products" class="btn btn-primary">Explore Products</a>
+    <a href="#mission" class="btn btn-outline">Our Mission</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">8.5B+</div>
+      <div class="stat-label">Daily Searches</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">2B+</div>
+      <div class="stat-label">Android Devices</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">3B+</div>
+      <div class="stat-label">Gmail Users</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">100+</div>
+      <div class="stat-label">Countries Served</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="section" id="products">
+  <p class="section-eyebrow reveal">Our Products</p>
+  <h2 class="section-title reveal">Tools That Empower Every Person on Earth</h2>
+  <p class="section-sub reveal">From Search to Workspace to Cloud, our products are designed to make life easier, more creative, and more connected.</p>
+
+  <div class="products-grid">
+    <div class="product-card reveal">
+      <div class="product-icon" style="background:#e8f0fe;">🔍</div>
+      <h3>Google Search</h3>
+      <p>The world's most trusted search engine — delivering fast, accurate, and AI-enhanced answers to billions of queries every day.</p>
+    </div>
+    <div class="product-card reveal">
+      <div class="product-icon" style="background:#e6f4ea;">📁</div>
+      <h3>Google Workspace</h3>
+      <p>Gmail, Docs, Drive, Meet, and more — an integrated suite that helps teams collaborate seamlessly from anywhere.</p>
+    </div>
+    <div class="product-card reveal">
+      <div class="product-icon" style="background:#fce8e6;">☁️</div>
+      <h3>Google Cloud</h3>
+      <p>Enterprise-grade infrastructure, data analytics, and AI services trusted by startups and Fortune 500 companies alike.</p>
+    </div>
+    <div class="product-card reveal">
+      <div class="product-icon" style="background:#fef7e0;">🗺️</div>
+      <h3>Google Maps</h3>
+      <p>Real-time navigation and local discovery for over one billion people, covering 220+ countries and territories.</p>
+    </div>
+    <div class="product-card reveal">
+      <div class="product-icon" style="background:#e8f0fe;">▶️</div>
+      <h3>YouTube</h3>
+      <p>The world's largest video platform with 500 hours of video uploaded every minute and over 2 billion logged-in users monthly.</p>
+    </div>
+    <div class="product-card reveal">
+      <div class="product-icon" style="background:#e6f4ea;">🤖</div>
+      <h3>Gemini</h3>
+      <p>Google's most capable multimodal AI — helping individuals and businesses think, create, and build faster than ever before.</p>
+    </div>
+  </div>
+</section>
+
+<!-- AI -->
+<section class="ai-section" id="ai">
+  <div class="ai-inner">
+    <div class="ai-text">
+      <p class="section-eyebrow reveal">Artificial Intelligence</p>
+      <h2 class="section-title reveal">AI That Works for Everyone</h2>
+      <p class="section-sub reveal">Google AI is woven into everything we build — not as a feature, but as a foundation. From smarter Search to life-saving health research, our AI models are advancing what's possible.</p>
+      <a href="#" class="btn btn-primary reveal">Explore Google AI</a>
+    </div>
+    <div class="ai-visual reveal">
+      <div class="ai-chat">
+        <div>
+          <div class="chat-label chat-label-right">You</div>
+          <div class="chat-msg chat-user">Explain quantum computing in simple terms.</div>
+        </div>
+        <div>
+          <div class="chat-label">Gemini</div>
+          <div class="chat-msg chat-ai">Think of it this way: classical computers process bits — either 0 or 1. Quantum computers use "qubits" that can be 0, 1, or both at the same time (superposition), letting them explore many solutions simultaneously. This makes them exponentially faster for specific problems like drug discovery and cryptography. ✨</div>
+        </div>
+        <div>
+          <div class="chat-label chat-label-right">You</div>
+          <div class="chat-msg chat-user">How is Google using it today?</div>
+        </div>
+        <div>
+          <div class="chat-label">Gemini</div>
+          <div class="chat-msg chat-ai">Google's Willow chip achieved a breakthrough in 2024 — completing a computation in 5 minutes that would take classical supercomputers 10 septillion years. We're applying this to materials science, climate modeling, and AI training. 🚀</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="mission-section" id="mission">
+  <div class="mission-inner">
+    <div class="mission-text">
+      <p class="section-eyebrow reveal">Our Mission</p>
+      <h2 class="section-title reveal">To Organize the World's Information and Make it Universally Accessible and Useful</h2>
+      <p class="section-sub reveal">This mission — unchanged since 1998 — is bigger and more important than ever. We believe access to information is a fundamental right.</p>
+    </div>
+    <div class="mission-pillars reveal">
+      <div class="pillar">
+        <div class="pillar-dot" style="background:#e8f0fe;">🌐</div>
+        <div>
+          <h4>Universal Access</h4>
+          <p>We invest in connectivity infrastructure and low-bandwidth tools to ensure everyone, everywhere can access information.</p>
+        </div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-dot" style="background:#e6f4ea;">🛡️</div>
+        <div>
+          <h4>Privacy & Security</h4>
+          <p>Your data belongs to you. We build privacy-preserving technologies and give you transparent controls over your information.</p>
+        </div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-dot" style="background:#fce8e6;">💡</div>
+        <div>
+          <h4>Genuine Helpfulness</h4>
+          <p>We design AI and products that are genuinely helpful — not addictive — putting individual and societal wellbeing first.</p>
+        </div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-dot" style="background:#fef7e0;">⚖️</div>
+        <div>
+          <h4>Responsible AI</h4>
+          <p>We publish our AI principles, conduct red-teaming, and collaborate with governments and academia to develop AI safely and equitably.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<div class="timeline-wrap" id="history">
+  <p class="section-eyebrow reveal">Our Journey</p>
+  <h2 class="section-title reveal">25+ Years of Innovation</h2>
+  <p class="section-sub reveal">From a Stanford dorm room to one of the world's most impactful technology companies.</p>
+
+  <div class="timeline">
+    <div class="tl-item reveal">
+      <div class="tl-dot" style="border-color:var(--blue);"></div>
+      <div class="tl-year">1998</div>
+      <div class="tl-content">
+        <h4>Google is Founded</h4>
+        <p>Larry Page and Sergey Brin incorporate Google Inc. in Menlo Park, CA, with a mission to organize the world's information.</p>
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot" style="border-color:var(--red);"></div>
+      <div class="tl-year">2004</div>
+      <div class="tl-content">
+        <h4>Gmail & IPO</h4>
+        <p>Gmail launches with 1 GB of storage — revolutionary at the time. Google goes public at $85/share, raising $1.67B.</p>
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot" style="border-color:var(--yellow);"></div>
+      <div class="tl-year">2008</div>
+      <div class="tl-content">
+        <h4>Chrome & Android</h4>
+        <p>Google Chrome launches and quickly becomes the world's most popular browser. Android 1.0 ships on the HTC Dream.</p>
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot" style="border-color:var(--green);"></div>
+      <div class="tl-year">2015</div>
+      <div class="tl-content">
+        <h4>Alphabet Restructure</h4>
+        <p>Google reorganizes under Alphabet Inc., enabling moonshot projects like Waymo and Verily to operate with greater independence.</p>
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot" style="border-color:var(--blue);"></div>
+      <div class="tl-year">2023</div>
+      <div class="tl-content">
+        <h4>The AI Era Begins</h4>
+        <p>Bard launches and evolves into Gemini — Google's most capable multimodal AI, integrated across all major products.</p>
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot" style="border-color:var(--green);"></div>
+      <div class="tl-year">2024</div>
+      <div class="tl-content">
+        <h4>Quantum Supremacy 2.0</h4>
+        <p>Google's Willow quantum chip achieves exponential error reduction, marking a historic milestone in computing.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SUSTAINABILITY -->
+<section class="resp-section" id="sustainability">
+  <div class="resp-inner">
+    <div style="text-align:center; max-width:600px; margin:0 auto;">
+      <p class="section-eyebrow reveal">Sustainability & Responsibility</p>
+      <h2 class="section-title reveal" style="max-width:100%;">Building a Better Future for Everyone</h2>
+      <p class="section-sub reveal" style="max-width:100%;">We believe technology must benefit not just users, but society and the planet as a whole.</p>
+    </div>
+    <div class="resp-grid">
+      <div class="resp-card reveal" style="background:#f0f9f4;">
+        <div class="resp-icon">🌿</div>
+        <h3>Climate Action</h3>
+        <p>Operating on 100% renewable energy since 2017. Committed to running on 24/7 carbon-free energy by 2030 across all data centers.</p>
+      </div>
+      <div class="resp-card reveal" style="background:#f0f4ff;">
+        <div class="resp-icon">📚</div>
+        <h3>Digital Equity</h3>
+        <p>Invested $1B+ in digital skills training through Grow with Google, helping 100M+ people access quality education and jobs.</p>
+      </div>
+      <div class="resp-card reveal" style="background:#fff8ee;">
+        <div class="resp-icon">❤️</div>
+        <h3>Community Impact</h3>
+        <p>Google.org and Googlers have contributed over $1B in grants and 1M+ volunteer hours to nonprofits worldwide.</p>
+      </div>
+      <div class="resp-card reveal" style="background:#fff0f0;">
+        <div class="resp-icon">🔬</div>
+        <h3>Health Research</h3>
+        <p>Google DeepMind's AlphaFold has predicted 200M+ protein structures, accelerating drug discovery for diseases affecting billions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<section class="numbers-section">
+  <div class="numbers-inner">
+    <div class="num-card reveal">
+      <h2>$307B</h2>
+      <p>Annual Revenue (2023)</p>
+    </div>
+    <div class="num-card reveal">
+      <h2>182K+</h2>
+      <p>Employees Worldwide</p>
+    </div>
+    <div class="num-card reveal">
+      <h2>200+</h2>
+      <p>Countries & Territories</p>
+    </div>
+    <div class="num-card reveal">
+      <h2>25+</h2>
+      <p>Years of Innovation</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo">
+          <span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span>
+        </a>
+        <p>Organizing the world's information and making it universally accessible and useful since 1998.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Products</h5>
+        <a href="#">Search</a>
+        <a href="#">Gmail</a>
+        <a href="#">Maps</a>
+        <a href="#">YouTube</a>
+        <a href="#">Chrome</a>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a href="#">About Google</a>
+        <a href="#">Careers</a>
+        <a href="#">Press</a>
+        <a href="#">Blog</a>
+        <a href="#">Investors</a>
+      </div>
+      <div class="footer-col">
+        <h5>Responsibility</h5>
+        <a href="#">Sustainability</a>
+        <a href="#">Safety Center</a>
+        <a href="#">Privacy</a>
+        <a href="#">AI Principles</a>
+        <a href="#">Accessibility</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Google LLC. All rights reserved.</span>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Navbar scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 10);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
